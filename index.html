@@ -159,8 +159,9 @@
     .comp p { font-size: 0.92rem; color: var(--muted); line-height: 1.6; }
 
     .eqbox { background: transparent; border: 0; border-radius: 0; padding: 0.2rem 1rem; margin: 1.5rem auto 1.7rem; max-width: 820px; overflow-x: auto; overflow-y: hidden; }
-    .fig-row { display: flex; gap: 1.3rem; align-items: center; justify-content: center; flex-wrap: wrap; margin-top: 0.5rem; }
-    .fig-row .fig { margin: 0; max-width: 100%; }
+    .fig-row { display: flex; gap: 1.2rem; align-items: flex-start; justify-content: center; margin-top: 0.5rem; }
+    .fig-row .fig { flex: 1 1 0; min-width: 0; width: 100%; max-width: none; margin: 0; }
+    @media (max-width: 640px) { .fig-row { flex-direction: column; align-items: center; } .fig-row .fig { max-width: 560px; } }
     .hf-line { text-align: center; margin-top: 1rem; }
 
     .callout { max-width: 860px; margin: 0 auto; background: #f7f8f3; border: 1px solid var(--line); border-left: 3px solid var(--good); border-radius: 4px; padding: 1.5rem 1.7rem; }
@@ -309,8 +310,8 @@
         <p class="figcap" style="text-align:center; margin-bottom:1.6rem;">The per-token reward is the conditional pointwise mutual information between the next token and the privileged context $c$. Default self-distillation uses $\delta_t = +u_t$ &mdash; rewarding whatever $c$ makes more likely.</p>
 
         <div class="fig-row">
-          <img class="fig" src="./static/images/fig2a_trace_main_pid24_y20.png" alt="Per-token signal u_t colored along a single Qwen3-4B rollout: blue deliberation tokens (Wait, Let, Maybe) carry negative u_t; red shortcut tokens (Given, Assign, succeeds) carry positive u_t." style="flex:1.5 1 360px;" loading="lazy" decoding="async">
-          <img class="fig" src="./static/images/fig2b_heatmap.png" alt="Student vs teacher next-token probability heatmap over 192 rollouts, showing two off-diagonal lobes of opposite u_t sign: a heavier blue deliberation lobe and a lighter red shortcut lobe." style="flex:1 1 280px;" loading="lazy" decoding="async">
+          <img class="fig" src="./static/images/fig2a_trace_main_pid24_y20.png" alt="Per-token signal u_t colored along a single Qwen3-4B rollout: blue deliberation tokens (Wait, Let, Maybe) carry negative u_t; red shortcut tokens (Given, Assign, succeeds) carry positive u_t." style="flex:1.55 1 0;" loading="lazy" decoding="async">
+          <img class="fig" src="./static/images/fig2b_heatmap.png" alt="Student vs teacher next-token probability heatmap over 192 rollouts, showing two off-diagonal lobes of opposite u_t sign: a heavier blue deliberation lobe and a lighter red shortcut lobe." style="flex:1 1 0;" loading="lazy" decoding="async">
         </div>
         <p class="figcap"><b>Per-token signal $u_t = t_t - s_t$ on Qwen3-4B-IT-2507 at AIME&ndash;25.</b>
           <span class="token-red">Shortcut tokens</span> ($u_t \gg 0$, red) &mdash; <i>Given</i>, <i>Assign</i>, <i>succeeds</i>, <i>holds</i> &mdash; are strongly rewarded once the answer is known.
